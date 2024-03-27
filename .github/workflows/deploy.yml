@@ -6,9 +6,18 @@ on:
       - main
 
 jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    # Add any additional steps needed for checking before deployment
+
   deploy:
     runs-on: ubuntu-latest
-    needs: build
+    needs: check
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
 
     steps:
